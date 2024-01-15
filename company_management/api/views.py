@@ -39,5 +39,17 @@ def employeeHandlerCR(request):
 
     if request.method == 'POST':
         return employeeViews.createEmployee(request)
+    elif request.method == 'GET':
+        return employeeViews.getAllEmployees(request)
+    return JsonResponse({'status': 'fail', 'message': 'Route Not Found'}, status=404)
+
+#HANDLE UPDATE AND DELETE OPERATIONS ON EMPLOYEE
+@csrf_exempt
+def EmployeetHandlerUD(request,id):
+    
+    if request.method in ['PATCH','PUT']:
+        return employeeViews.updateEmployee(request,id)
+    # elif request.method == 'DELETE':
+    #     return departmentViews.deleteDepartment(request,id)
 
     return JsonResponse({'status': 'fail', 'message': 'Route Not Found'}, status=404)
