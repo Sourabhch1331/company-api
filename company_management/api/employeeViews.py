@@ -64,5 +64,13 @@ def updateEmployee(request,id):
     emp.save()
     return JsonResponse({'status': 'success', 'message': 'updated!'},status=204)
 
-
-
+#Delete department with id=pk
+def deleteEmployee(request,id):
+    try:
+        emp = Employee.objects.get(pk=id)
+        emp.delete()
+    except Employee.DoesNotExist:
+        return JsonResponse({'status': 'fail', 'message': 'Not Found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'status': 'fail', 'message': 'something went wrong'}, status=500)
+    return JsonResponse({'status': 'success', 'message': 'Deleted!'}, status=204)

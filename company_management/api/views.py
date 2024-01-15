@@ -49,7 +49,7 @@ def EmployeetHandlerUD(request,id):
     
     if request.method in ['PATCH','PUT']:
         return employeeViews.updateEmployee(request,id)
-    # elif request.method == 'DELETE':
-    #     return departmentViews.deleteDepartment(request,id)
+    elif request.method == 'DELETE':
+        return employeeViews.deleteEmployee(request,id)
 
     return JsonResponse({'status': 'fail', 'message': 'Route Not Found'}, status=404)
