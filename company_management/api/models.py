@@ -9,17 +9,17 @@ class Department(models.Model):
     description=models.TextField(blank=True)
 
     def __str__(self):
-        return 'Department name: '+self.name + ' ,Department description: '+self.description
+        return self.name
 
 
 class Employee(models.Model):
     firt_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
     id=models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
-    email=models.EmailField()
+    email=models.EmailField(unique=True)
     role=models.CharField(max_length=20)
-    department=models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
-    manager_id=models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    department_id=models.UUIDField(blank=True,null=True)
+    manager_id=models.UUIDField(blank=True,null=True)
 
 
     def __str__(self):
